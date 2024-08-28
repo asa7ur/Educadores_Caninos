@@ -60,7 +60,7 @@ const NavBar = () => {
     <Wrapper className='nav' ref={navbarRef}>
       <div className='nav-container'>
         <div className='nav-logo'>
-          <Link to='hero' smooth={true} offset={-63.2} duration={500}>
+          <Link to='hero' smooth={true} offset={-82} duration={500}>
             <img src={logo} alt='logo' />
           </Link>
         </div>
@@ -111,7 +111,6 @@ const Wrapper = styled.nav`
   top: 0;
   z-index: 99;
   background-color: var(--backgroundColor);
-  border-bottom: var(--border);
   width: 80%;
   margin: 0 auto;
   opacity: 0;
