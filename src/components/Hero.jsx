@@ -115,12 +115,12 @@ const Wrapper = styled.header`
     place-items: center;
 
     .content {
-      top: 45%;
+      top: 35%;
     }
 
     h1 {
       font-size: 4rem;
-      margin-bottom: 1%.5;
+      margin-bottom: 1.5rem;
     }
   }
 `

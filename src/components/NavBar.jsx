@@ -122,7 +122,7 @@ const Wrapper = styled.nav`
     align-items: center;
     justify-content: space-between;
     max-width: var(--max-width);
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 1.5rem;
   }
 
   .nav-logo {
