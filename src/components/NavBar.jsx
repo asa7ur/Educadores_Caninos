@@ -111,6 +111,7 @@ const Wrapper = styled.nav`
   top: 0;
   z-index: 99;
   background-color: var(--backgroundColor);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   width: 80%;
   margin: 0 auto;
   opacity: 0;
@@ -121,30 +122,16 @@ const Wrapper = styled.nav`
     align-items: center;
     justify-content: space-between;
     max-width: var(--max-width);
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 0.5rem;
   }
 
   .nav-logo {
     a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 5px;
       cursor: pointer;
     }
 
     img {
-      max-height: 25px;
-    }
-
-    span {
-      color: var(--textColor);
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-
-    span:hover {
-      color: var(--primary-500);
+      max-height: 50px;
     }
   }
 
@@ -155,7 +142,7 @@ const Wrapper = styled.nav`
     cursor: pointer;
     transition: var(--transition);
     svg {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
 
     :hover {
@@ -177,9 +164,10 @@ const Wrapper = styled.nav`
 
   .dropdown-menu {
     position: absolute;
-    top: 61.7px;
+    top: 83px;
     right: 20px;
-    background-color: var(--grey-700);
+    background-color: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     padding: 10px 20px;
     width: 150px;
@@ -215,16 +203,12 @@ const Wrapper = styled.nav`
 
   @media (min-width: 800px) {
     .nav-container {
-      padding: 1rem 2rem;
+      padding: 0.5rem 0.5rem;
     }
 
     .nav-logo {
       img {
-        max-height: 50px;
-      }
-
-      span {
-        font-size: 1.3rem;
+        max-height: 60px;
       }
     }
 
@@ -262,7 +246,7 @@ const Wrapper = styled.nav`
 
   @media (max-width: 460px) {
     .nav-container {
-      padding: 1rem 1.5rem;
+      padding: 1rem 0.5rem;
     }
 
     .nav-logo {
