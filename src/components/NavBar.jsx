@@ -246,17 +246,7 @@ const Wrapper = styled.nav`
 
   @media (max-width: 460px) {
     .nav-container {
-      padding: 1rem 0.5rem;
-    }
-
-    .nav-logo {
-      img {
-        max-height: 20px;
-      }
-
-      span {
-        font-size: 1rem;
-      }
+      padding: 1rem 1rem;
     }
   }
 `
