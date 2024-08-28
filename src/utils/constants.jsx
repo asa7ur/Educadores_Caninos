@@ -1,22 +1,17 @@
 export const links = [
   {
     id: 1,
-    to: 'about-me',
-    value: 'about me',
+    to: 'servicios',
+    value: 'servicios',
   },
   {
     id: 2,
-    to: 'services',
-    value: 'services',
+    to: 'nuestro-equipo',
+    value: 'nuestro equipo',
   },
   {
     id: 3,
-    to: 'portfolio',
-    value: 'portfolio',
-  },
-  {
-    id: 4,
-    to: 'contact-me',
-    value: 'contact me',
-  },
+    to: 'contactar',
+    value: 'contactar',
+  }
 ]
