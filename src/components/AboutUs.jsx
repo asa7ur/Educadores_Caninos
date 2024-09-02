@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { motion, useMotionValue } from 'framer-motion'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 import styled from 'styled-components'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { members } from '../utils/constants'
@@ -18,38 +18,36 @@ const SPRING_OPTIONS = {
 export const AboutUs = () => {
   const [imgIndex, setImgIndex] = useState(0)
   const dragX = useMotionValue(0)
-  const [intervalRef, setIntervalRef] = useState(null)
+  const intervalRef = useRef(null)
+
+  const updateImgIndex = useCallback((newIndex) => {
+    setImgIndex((prev) => (newIndex !== undefined ? newIndex : prev))
+  }, [])
 
   useEffect(() => {
-    if (intervalRef) {
-      clearInterval(intervalRef)
-    }
-
-    const newIntervalRef = setInterval(() => {
-      setImgIndex((prev) => (prev === members.length - 1 ? 0 : prev + 1))
+    intervalRef.current = setInterval(() => {
+      updateImgIndex((prev) => (prev === members.length - 1 ? 0 : prev + 1))
     }, AUTO_DELAY)
 
-    setIntervalRef(newIntervalRef)
+    return () => clearInterval(intervalRef.current)
+  }, [updateImgIndex])
 
-    return () => clearInterval(newIntervalRef)
-  }, [imgIndex])
-
-  const onDragEnd = () => {
+  const onDragEnd = useCallback(() => {
     const x = dragX.get()
     if (x <= -DRAG_BUFFER && imgIndex < members.length - 1) {
-      setImgIndex((pv) => pv + 1)
+      updateImgIndex(imgIndex + 1)
     } else if (x >= DRAG_BUFFER && imgIndex > 0) {
-      setImgIndex((pv) => pv - 1)
+      updateImgIndex(imgIndex - 1)
     }
-  }
+  }, [dragX, imgIndex, updateImgIndex])
 
-  const handlePrevClick = () => {
-    setImgIndex((prev) => (prev > 0 ? prev - 1 : members.length - 1))
-  }
+  const handlePrevClick = useCallback(() => {
+    updateImgIndex(imgIndex > 0 ? imgIndex - 1 : members.length - 1)
+  }, [imgIndex, updateImgIndex])
 
-  const handleNextClick = () => {
-    setImgIndex((prev) => (prev < members.length - 1 ? prev + 1 : 0))
-  }
+  const handleNextClick = useCallback(() => {
+    updateImgIndex(imgIndex < members.length - 1 ? imgIndex + 1 : 0)
+  }, [imgIndex, updateImgIndex])
 
   return (
     <Wrapper>
@@ -84,19 +82,28 @@ export const AboutUs = () => {
       </motion.div>
 
       <div className='navigation'>
-        <div className='arrow left' onClick={handlePrevClick}>
+        <div
+          className='arrow left'
+          onClick={handlePrevClick}
+          aria-label='Previous Slide'
+        >
           <FaArrowLeft />
         </div>
         <div className='dots'>
           {members.map((_, idx) => (
             <button
               key={idx}
-              onClick={() => setImgIndex(idx)}
+              onClick={() => updateImgIndex(idx)}
               className={`dot ${idx === imgIndex ? 'active' : ''}`}
+              aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
         </div>
-        <div className='arrow right' onClick={handleNextClick}>
+        <div
+          className='arrow right'
+          onClick={handleNextClick}
+          aria-label='Next Slide'
+        >
           <FaArrowRight />
         </div>
       </div>
