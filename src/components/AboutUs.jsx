@@ -58,7 +58,7 @@ export const AboutUs = () => {
         drag='x'
         dragConstraints={{ left: 0, right: 0 }}
         style={{ x: dragX }}
-        animate={{ translateX: `-${imgIndex * 100}%` }}
+        animate={{ translateX: `-${imgIndex * 100}vw` }}
         transition={SPRING_OPTIONS}
         onDragEnd={onDragEnd}
         className='carousel'
@@ -121,6 +121,7 @@ const Wrapper = styled.section`
     width: 100%;
     cursor: grab;
     align-items: center;
+    justify-content: center;
     position: relative;
   }
 
@@ -131,13 +132,14 @@ const Wrapper = styled.section`
 
   .slide {
     display: flex;
-    width: 100vw;
+    width: 90vw;
     flex-shrink: 0;
     border-radius: 1rem;
     background-color: var(--primary-400);
     overflow: hidden;
     align-items: center;
     justify-content: center;
+    margin: 0 5vw;
   }
 
   .image {
