@@ -1,243 +1,209 @@
+import React, { useEffect, useState } from 'react'
+import { motion, useMotionValue } from 'framer-motion'
 import styled from 'styled-components'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { members } from '../utils/constants'
 
-const AboutUs = () => {
+const ONE_SECOND = 1000
+const AUTO_DELAY = ONE_SECOND * 10
+const DRAG_BUFFER = 50
+
+const SPRING_OPTIONS = {
+  type: 'spring',
+  mass: 3,
+  stiffness: 400,
+  damping: 50,
+}
+
+export const AboutUs = () => {
+  const [imgIndex, setImgIndex] = useState(0)
+  const dragX = useMotionValue(0)
+  const [intervalRef, setIntervalRef] = useState(null)
+
+  useEffect(() => {
+    if (intervalRef) {
+      clearInterval(intervalRef)
+    }
+
+    const newIntervalRef = setInterval(() => {
+      setImgIndex((prev) => (prev === members.length - 1 ? 0 : prev + 1))
+    }, AUTO_DELAY)
+
+    setIntervalRef(newIntervalRef)
+
+    return () => clearInterval(newIntervalRef)
+  }, [imgIndex])
+
+  const onDragEnd = () => {
+    const x = dragX.get()
+    if (x <= -DRAG_BUFFER && imgIndex < members.length - 1) {
+      setImgIndex((pv) => pv + 1)
+    } else if (x >= DRAG_BUFFER && imgIndex > 0) {
+      setImgIndex((pv) => pv - 1)
+    }
+  }
+
+  const handlePrevClick = () => {
+    setImgIndex((prev) => (prev > 0 ? prev - 1 : members.length - 1))
+  }
+
+  const handleNextClick = () => {
+    setImgIndex((prev) => (prev < members.length - 1 ? prev + 1 : 0))
+  }
+
   return (
     <Wrapper>
-      <div className='section-center section'>
-        <div className='content'>
-          <div className='section-hero'>
-            <h2>¿Tienes dudas?</h2>
-            <p>
-              Si quieres preguntarnos más información no dudes en escribirnos y
-              estaremos encantadas de ofrecerte la mejor experiencia Tartas
-              Karina. Además tenemos un apartado de preguntas frecuentes para
-              que resuelvas tus dudas aún más fácilmente.
-            </p>
-          </div>
-          <form className='form'>
-            <h2>Escríbenos</h2>
-            <div className='form-group'>
-              <input
-                type='text'
-                name='name'
-                className='user_name'
-                placeholder='Nombre'
-                required
+      <h3>Conoce al equipo</h3>
+      <motion.div
+        drag='x'
+        dragConstraints={{ left: 0, right: 0 }}
+        style={{ x: dragX }}
+        animate={{ translateX: `-${imgIndex * 100}%` }}
+        transition={SPRING_OPTIONS}
+        onDragEnd={onDragEnd}
+        className='carousel'
+      >
+        <div className='slides'>
+          {members.map((member, idx) => (
+            <div
+              key={member.id}
+              className={`slide ${imgIndex === idx ? 'active' : ''}`}
+            >
+              <motion.div
+                className='image'
+                style={{ backgroundImage: `url(${member.image})` }}
+                transition={SPRING_OPTIONS}
               />
-              <input
-                type='email'
-                name='email'
-                className='user_email'
-                placeholder='Correo electrónico'
-                required
-              />
-              <input
-                type='text'
-                name='subject'
-                className='subject'
-                placeholder='Motivo de consulta'
-                required
-              />
-              <textarea
-                name='message'
-                className='message'
-                placeholder='Tu mensaje'
-                required
-              ></textarea>
+              <div className='text-content'>
+                <h2 className='title'>{member.title}</h2>
+                <p className='description'>{member.description}</p>
+              </div>
             </div>
-            <div className='form-group result-container'>
-              <button type='submit' className='submit-btn btn'></button>
-            </div>
-          </form>
+          ))}
+        </div>
+      </motion.div>
+
+      <div className='navigation'>
+        <div className='arrow left' onClick={handlePrevClick}>
+          <FaArrowLeft />
+        </div>
+        <div className='dots'>
+          {members.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setImgIndex(idx)}
+              className={`dot ${idx === imgIndex ? 'active' : ''}`}
+            />
+          ))}
+        </div>
+        <div className='arrow right' onClick={handleNextClick}>
+          <FaArrowRight />
         </div>
       </div>
     </Wrapper>
   )
 }
 
-export default AboutUs
-
 const Wrapper = styled.section`
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .section-hero {
-    max-width: var(--fixed-width);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+  position: relative;
+  overflow: hidden;
+  background-color: var(--primary-200);
+  padding: 2rem 0;
 
   h3 {
-    text-transform: none;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--black);
   }
 
-  p {
-    line-height: 2;
-    max-width: 45em;
-    color: var(--grey-500);
-  }
-
-  .links {
+  .carousel {
     display: flex;
+    width: 100%;
+    cursor: grab;
+    align-items: center;
+    position: relative;
+  }
+
+  .slides {
+    display: flex;
+    width: 100%;
+  }
+
+  .slide {
+    display: flex;
+    width: 100vw;
+    flex-shrink: 0;
+    border-radius: 1rem;
+    background-color: var(--primary-400);
+    overflow: hidden;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
   }
 
-  .links .icon {
-    color: var(--primary-500);
+  .image {
+    flex: 1;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .text-content {
+    flex: 1;
+    padding: 2rem;
+    color: var(--black);
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title {
+    margin: 0;
     font-size: 2rem;
   }
 
-  .links a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--grey-500);
+  .description {
+    margin: 1rem 0 0;
     font-size: 1.2rem;
   }
 
-  .form {
-    max-width: var(--fixed-width);
-    background-color: var(--primary-200);
-    border-radius: 25px;
-    box-shadow: var(--shadow-3);
-    padding: 2rem 2.5rem;
-    margin: 3rem auto;
-  }
-
-  .form-section {
+  .navigation {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
-  .form-group input,
-  .form-group textarea {
-    background-color: var(--grey-100);
-    width: 100%;
-    padding: var(--padding);
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--grey-200);
-    border-radius: 25px;
+  .arrow {
+    cursor: pointer;
+    color: var(--black);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
   }
 
-  .form-group textarea {
-    height: 150px;
-    resize: none;
-    font-family: var(--bodyFont);
-    font-size: 1rem;
+  .arrow:hover {
+    color: var(--primary-600);
   }
 
-  input {
-    font-family: var(--bodyFont);
-    font-size: 1rem;
-  }
-
-  .result-container {
+  .dots {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 3rem;
+    justify-content: center;
+    gap: 0.5rem;
   }
 
-  .result-container p {
-    opacity: 0;
-    transition: all 0.3s ease;
-    color: var(--primary-950);
-  }
-
-  ::placeholder {
-    font-size: 1rem;
-    font-family: var(--bodyFont);
-    color: var(--grey-400);
-    text-transform: uppercase;
-  }
-
-  @keyframes spinner {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .sending {
-    display: inline-block;
-    width: 1.75rem;
-    height: 1.75rem;
+  .dot {
+    height: 0.75rem;
+    width: 0.75rem;
     border-radius: 50%;
-    border: 3px solid var(--grey-400);
-    border-top-color: var(--primary-500);
-    animation: spinner 0.6s linear infinite;
+    background-color: var(--black);
+    transition: background-color 0.3s ease;
   }
 
-  @media (min-width: 1024px) {
-    .content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      margin-top: 2rem;
-    }
-
-    .section-hero {
-      align-items: flex-start;
-    }
-
-    p {
-      margin-bottom: 0;
-      font-size: 1.2rem;
-    }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-    }
-
-    .links .icon {
-      color: var(--primary-500);
-      font-size: 1.5rem;
-    }
-
-    .links a {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      color: var(--grey-500);
-      font-size: 0.875rem;
-    }
-
-    .form-group textarea {
-      height: 120px;
-      font-size: 0.875rem;
-    }
-
-    input {
-      font-size: 0.875rem;
-    }
-
-    .btn {
-      font-size: 0.875rem;
-    }
-
-    ::placeholder {
-      font-size: 0.875rem;
-    }
+  .dot.active {
+    background-color: var(--primary-600);
   }
 `
+
+export default AboutUs
