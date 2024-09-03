@@ -281,6 +281,7 @@ const Wrapper = styled.section`
       align-items: center;
       justify-content: center;
       gap: 3rem;
+      padding-top: 1rem;
     }
 
     .links .icon {
