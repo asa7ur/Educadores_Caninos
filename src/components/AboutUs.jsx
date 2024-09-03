@@ -126,6 +126,7 @@ export const AboutUs = () => {
 
 const Wrapper = styled.section`
   background-color: var(--primary-200);
+  overflow: hidden;
 
   h2 {
     text-align: center;
@@ -225,6 +226,7 @@ const Wrapper = styled.section`
   }
 
   .divider {
+    position: relative;
     width: 100%;
     height: auto;
     overflow: hidden;
