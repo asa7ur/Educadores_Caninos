@@ -1,137 +1,119 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
-import { motion, useMotionValue} from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+import { motion, useMotionValue } from 'framer-motion'
 import styled from 'styled-components'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { members } from '../utils/constants'
 
 const ONE_SECOND = 1000
-const AUTO_DELAY = ONE_SECOND * 20
+const AUTO_DELAY = ONE_SECOND * 10
 const DRAG_BUFFER = 50
 
 const SPRING_OPTIONS = {
   type: 'spring',
   mass: 3,
-  stiffness: 500,
+  stiffness: 400,
   damping: 50,
 }
 
 export const AboutUs = () => {
   const [imgIndex, setImgIndex] = useState(0)
   const dragX = useMotionValue(0)
-  const intervalRef = useRef(null)
-
-  const updateImgIndex = useCallback((newIndex) => {
-    setImgIndex((prev) => (newIndex !== undefined ? newIndex : prev))
-  }, [])
+  const [intervalRef, setIntervalRef] = useState(null)
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      updateImgIndex((prev) => (prev === members.length - 1 ? 0 : prev + 1))
+    if (intervalRef) {
+      clearInterval(intervalRef)
+    }
+
+    const newIntervalRef = setInterval(() => {
+      setImgIndex((prev) => (prev === members.length - 1 ? 0 : prev + 1))
     }, AUTO_DELAY)
 
-    return () => clearInterval(intervalRef.current)
-  }, [updateImgIndex])
+    setIntervalRef(newIntervalRef)
 
-  const onDragEnd = useCallback(() => {
+    return () => clearInterval(newIntervalRef)
+  }, [imgIndex])
+
+  const onDragEnd = () => {
     const x = dragX.get()
     if (x <= -DRAG_BUFFER && imgIndex < members.length - 1) {
-      updateImgIndex(imgIndex + 1)
+      setImgIndex((pv) => pv + 1)
     } else if (x >= DRAG_BUFFER && imgIndex > 0) {
-      updateImgIndex(imgIndex - 1)
+      setImgIndex((pv) => pv - 1)
     }
-  }, [dragX, imgIndex, updateImgIndex])
+  }
 
-  const handlePrevClick = useCallback(() => {
-    updateImgIndex(imgIndex > 0 ? imgIndex - 1 : members.length - 1)
-  }, [imgIndex, updateImgIndex])
+  const handlePrevClick = () => {
+    setImgIndex((prev) => (prev > 0 ? prev - 1 : members.length - 1))
+  }
 
-  const handleNextClick = useCallback(() => {
-    updateImgIndex(imgIndex < members.length - 1 ? imgIndex + 1 : 0)
-  }, [imgIndex, updateImgIndex])
+  const handleNextClick = () => {
+    setImgIndex((prev) => (prev < members.length - 1 ? prev + 1 : 0))
+  }
 
   return (
     <Wrapper>
-      <div className='section'>
-        <h2>Conoce al equipo</h2>
-        <motion.div
-          drag='x'
-          dragConstraints={{ left: 0, right: 0 }}
-          style={{ x: dragX }}
-          animate={{ translateX: `-${imgIndex * 100}vw` }}
-          transition={SPRING_OPTIONS}
-          onDragEnd={onDragEnd}
-          className='carousel'
-        >
-          <div className='slides'>
-            {members.map((member, idx) => (
-              <div
-                key={member.id}
-                className={`slide ${imgIndex === idx ? 'active' : ''}`}
-              >
-                <motion.div
-                  className='image'
-                  style={{ backgroundImage: `url(${member.image})` }}
-                  transition={SPRING_OPTIONS}
-                />
-                <div className='text-content'>
-                  <h3 className='title'>{member.title}</h3>
-                  <p className='description'>{member.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        <div className='navigation'>
-          <div className='arrow left' onClick={handlePrevClick}>
-            <FaArrowLeft />
-          </div>
-          <div className='dots'>
-            {members.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setImgIndex(idx)}
-                className={`dot ${idx === imgIndex ? 'active' : ''}`}
+      <h3>Conoce al equipo</h3>
+      <motion.div
+        drag='x'
+        dragConstraints={{ left: 0, right: 0 }}
+        style={{ x: dragX }}
+        animate={{ translateX: `-${imgIndex * 100}vw` }}
+        transition={SPRING_OPTIONS}
+        onDragEnd={onDragEnd}
+        className='carousel'
+      >
+        <div className='slides'>
+          {members.map((member, idx) => (
+            <div
+              key={member.id}
+              className={`slide ${imgIndex === idx ? 'active' : ''}`}
+            >
+              <motion.div
+                className='image'
+                style={{ backgroundImage: `url(${member.image})` }}
+                transition={SPRING_OPTIONS}
               />
-            ))}
-          </div>
-          <div className='arrow right' onClick={handleNextClick}>
-            <FaArrowRight />
-          </div>
+              <div className='text-content'>
+                <h2 className='title'>{member.title}</h2>
+                <p className='description'>{member.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className='divider'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          viewBox='0 0 35.278 3.52'
-          preserveAspectRatio='none'
-        >
-          <path
-            d='M0 3.528S27.04 3.352 35.278 0v3.528z'
-            opacity='.2'
-            fill='#ffffff'
-          />
-          <path
-            d='M0 3.528S27.04 3.374 35.278.425v3.103z'
-            opacity='.2'
-            fill='#ffffff'
-          />
-          <path d='M0 3.528S27.04 3.396 35.278.882v2.646z' fill='#ffffff' />
-          <path d='M0 3.527h35.278v.092H0z' fill='#ffffff' />
-        </svg>
+      </motion.div>
+
+      <div className='navigation'>
+        <div className='arrow left' onClick={handlePrevClick}>
+          <FaArrowLeft />
+        </div>
+        <div className='dots'>
+          {members.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setImgIndex(idx)}
+              className={`dot ${idx === imgIndex ? 'active' : ''}`}
+            />
+          ))}
+        </div>
+        <div className='arrow right' onClick={handleNextClick}>
+          <FaArrowRight />
+        </div>
       </div>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.section`
-  background-color: var(--primary-200);
+  position: relative;
   overflow: hidden;
+  background-color: var(--primary-200);
+  padding: 2rem 0;
 
-  h2 {
+  h3 {
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--primary-600);
+    color: var(--black);
   }
 
   .carousel {
@@ -223,21 +205,6 @@ const Wrapper = styled.section`
 
   .dot.active {
     background-color: var(--primary-600);
-  }
-
-  .divider {
-    position: relative;
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    line-height: 0;
-  }
-
-  .divider svg {
-    display: block;
-    width: 100%;
-    height: 100px;
-    transform: rotateY(180deg);
   }
 `
 
