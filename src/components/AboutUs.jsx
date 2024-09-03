@@ -5,13 +5,13 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { members } from '../utils/constants'
 
 const ONE_SECOND = 1000
-const AUTO_DELAY = ONE_SECOND * 10
+const AUTO_DELAY = ONE_SECOND * 20
 const DRAG_BUFFER = 50
 
 const SPRING_OPTIONS = {
   type: 'spring',
   mass: 3,
-  stiffness: 400,
+  stiffness: 500,
   damping: 50,
 }
 
