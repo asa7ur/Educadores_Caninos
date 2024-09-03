@@ -54,54 +54,73 @@ export const AboutUs = () => {
   return (
     <Wrapper>
       <div className='section'>
-
-      <h2>Conoce al equipo</h2>
-      <motion.div
-        drag='x'
-        dragConstraints={{ left: 0, right: 0 }}
-        style={{ x: dragX }}
-        animate={{ translateX: `-${imgIndex * 100}vw` }}
-        transition={SPRING_OPTIONS}
-        onDragEnd={onDragEnd}
-        className='carousel'
-      >
-        <div className='slides'>
-          {members.map((member, idx) => (
-            <div
-              key={member.id}
-              className={`slide ${imgIndex === idx ? 'active' : ''}`}
-            >
-              <motion.div
-                className='image'
-                style={{ backgroundImage: `url(${member.image})` }}
-                transition={SPRING_OPTIONS}
-              />
-              <div className='text-content'>
-                <h3 className='title'>{member.title}</h3>
-                <p className='description'>{member.description}</p>
+        <h2>Conoce al equipo</h2>
+        <motion.div
+          drag='x'
+          dragConstraints={{ left: 0, right: 0 }}
+          style={{ x: dragX }}
+          animate={{ translateX: `-${imgIndex * 100}vw` }}
+          transition={SPRING_OPTIONS}
+          onDragEnd={onDragEnd}
+          className='carousel'
+        >
+          <div className='slides'>
+            {members.map((member, idx) => (
+              <div
+                key={member.id}
+                className={`slide ${imgIndex === idx ? 'active' : ''}`}
+              >
+                <motion.div
+                  className='image'
+                  style={{ backgroundImage: `url(${member.image})` }}
+                  transition={SPRING_OPTIONS}
+                />
+                <div className='text-content'>
+                  <h3 className='title'>{member.title}</h3>
+                  <p className='description'>{member.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
-      <div className='navigation'>
-        <div className='arrow left' onClick={handlePrevClick}>
-          <FaArrowLeft />
-        </div>
-        <div className='dots'>
-          {members.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setImgIndex(idx)}
-              className={`dot ${idx === imgIndex ? 'active' : ''}`}
-            />
-          ))}
-        </div>
-        <div className='arrow right' onClick={handleNextClick}>
-          <FaArrowRight />
+        <div className='navigation'>
+          <div className='arrow left' onClick={handlePrevClick}>
+            <FaArrowLeft />
+          </div>
+          <div className='dots'>
+            {members.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setImgIndex(idx)}
+                className={`dot ${idx === imgIndex ? 'active' : ''}`}
+              />
+            ))}
+          </div>
+          <div className='arrow right' onClick={handleNextClick}>
+            <FaArrowRight />
+          </div>
         </div>
       </div>
+      <div className='divider'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 35.278 3.52'
+          preserveAspectRatio='none'
+        >
+          <path
+            d='M0 3.528S27.04 3.352 35.278 0v3.528z'
+            opacity='.2'
+            fill='#ffffff'
+          />
+          <path
+            d='M0 3.528S27.04 3.374 35.278.425v3.103z'
+            opacity='.2'
+            fill='#ffffff'
+          />
+          <path d='M0 3.528S27.04 3.396 35.278.882v2.646z' fill='#ffffff' />
+          <path d='M0 3.527h35.278v.092H0z' fill='#ffffff' />
+        </svg>
       </div>
     </Wrapper>
   )
@@ -207,6 +226,21 @@ const Wrapper = styled.section`
 
   .dot.active {
     background-color: var(--primary-600);
+  }
+
+  .divider {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .divider svg {
+    display: block;
+    width: 100%;
+    height: 100px;
+    transform: rotateY(180deg);
   }
 `
 
