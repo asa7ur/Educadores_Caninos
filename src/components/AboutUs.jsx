@@ -11,7 +11,7 @@ const DRAG_BUFFER = 50
 const SPRING_OPTIONS = {
   type: 'spring',
   mass: 3,
-  stiffness: 400,
+  stiffness: 200,
   damping: 50,
 }
 
@@ -52,7 +52,7 @@ export const AboutUs = () => {
   return (
     <Wrapper>
       <div className='section'>
-        <h3>Conoce al equipo</h3>
+        <h2>Conoce al equipo</h2>
         <motion.div
           drag='x'
           dragConstraints={{ left: 0, right: 0 }}
@@ -74,7 +74,7 @@ export const AboutUs = () => {
                   transition={SPRING_OPTIONS}
                 />
                 <div className='text-content'>
-                  <h2 className='title'>{member.title}</h2>
+                  <h3 className='title'>{member.title}</h3>
                   <p className='description'>{member.description}</p>
                 </div>
               </div>
@@ -127,10 +127,10 @@ export const AboutUs = () => {
 const Wrapper = styled.section`
   background-color: var(--primary-200);
 
-  h3 {
+  h2 {
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--black);
+    color: var(--primary-600);
   }
 
   .carousel {
