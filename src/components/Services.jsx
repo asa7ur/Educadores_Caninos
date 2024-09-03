@@ -50,6 +50,29 @@ const Services = () => {
           })}
         </div>
       </div>
+      <div className='divider'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 35.278 3.52'
+          preserveAspectRatio='none'
+        >
+          <path
+            d='M0 3.528S27.04 3.352 35.278 0v3.528z'
+            opacity='.2'
+            fill='var(--primary-200)'
+          />
+          <path
+            d='M0 3.528S27.04 3.374 35.278.425v3.103z'
+            opacity='.2'
+            fill='var(--primary-200)'
+          />
+          <path
+            d='M0 3.528S27.04 3.396 35.278.882v2.646z'
+            fill='var(--primary-200)'
+          />
+          <path d='M0 3.527h35.278v.092H0z' fill='var(--primary-200)' />
+        </svg>
+      </div>
     </Wrapper>
   )
 }
@@ -90,6 +113,22 @@ const Wrapper = styled.section`
 
   img {
     width: 200px;
+  }
+
+  .divider {
+    /* position: absolute;
+    bottom: 0;
+    left: 0; */
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .divider svg {
+    display: block;
+    width: 100%;
+    height: 100px;
   }
 
   @media (min-width: 768px) {
