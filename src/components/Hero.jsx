@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { Link as ScrollLink } from 'react-scroll'
-import { links } from '../utils/constants'
 import gsap from 'gsap'
 import styled from 'styled-components'
 import heroBcg from '../assets/heroBcg.jpg'

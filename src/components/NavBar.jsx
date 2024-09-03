@@ -185,7 +185,7 @@ const Wrapper = styled.nav`
     }
 
     img {
-      max-height: 50px;
+      max-height: 60px;
     }
   }
 
