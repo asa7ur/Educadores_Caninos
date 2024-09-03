@@ -5,6 +5,7 @@ import cat_1 from '../assets/cat_1.jpg'
 import cat_2 from '../assets/cat_2.jpg'
 import cat_3 from '../assets/cat_3.jpg'
 import cat_4 from '../assets/cat_4.jpg'
+import { FaFacebook, FaInstagram } from 'react-icons/fa'
 
 export const links = [
   {
@@ -81,5 +82,20 @@ export const members = [
     title: 'Rufus',
     description:
       'Es experto en enseñar a los perros a proteger el hogar. Con su presencia imponente y su mirada firme, Rufus guía a los perros hacia la obediencia, mostrándoles cómo vigilar y proteger. Su enfoque es directo y no tolera la indisciplina.',
+  },
+]
+
+export const socials = [
+  {
+    id: 1,
+    icon: <FaFacebook className='icon' />,
+    text: 'Santuario La Candela',
+    url: 'https://www.facebook.com/santuariolacandela',
+  },
+  {
+    id: 2,
+    icon: <FaInstagram className='icon' />,
+    text: 'santuario_lacandela',
+    url: 'https://instagram.com/santuario_lacandela',
   },
 ]

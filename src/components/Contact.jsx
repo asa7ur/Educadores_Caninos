@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useState } from 'react'
+import { socials } from '../utils/constants'
 import axios from 'axios'
 
 const Contact = () => {
@@ -49,6 +50,23 @@ const Contact = () => {
               del camino. Escríbenos o llámanos, y juntos encontraremos la mejor
               solución para las necesidades de tu mascota.
             </p>
+            <div className='links'>
+              {socials.map((social) => {
+                const { id, icon, url, text } = social
+                return (
+                  <a
+                    key={id}
+                    href={url}
+                    className='nav-contact'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {icon}
+                    {text}
+                  </a>
+                )
+              })}
+            </div>
           </div>
           <form className='form' onSubmit={handleSubmit}>
             <h2>Escríbenos</h2>
@@ -91,7 +109,11 @@ const Contact = () => {
             </div>
             <div className='form-group result-container'>
               <button type='submit' className='submit-btn btn'>
-                {isLoading ? <span className='sending'></span> : 'Enviar mensaje'}
+                {isLoading ? (
+                  <span className='sending'></span>
+                ) : (
+                  'Enviar mensaje'
+                )}
               </button>
               {result && (
                 <div className='result' style={{ opacity: 1 }}>
@@ -272,6 +294,10 @@ const Wrapper = styled.section`
       gap: 5px;
       color: var(--grey-500);
       font-size: 0.875rem;
+    }
+
+    .form {
+      padding: 2rem 2rem;
     }
 
     .form-group textarea {
