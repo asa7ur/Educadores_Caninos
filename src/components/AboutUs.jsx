@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion, useMotionValue} from 'framer-motion'
 import styled from 'styled-components'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { members } from '../utils/constants'
@@ -11,7 +11,7 @@ const DRAG_BUFFER = 50
 const SPRING_OPTIONS = {
   type: 'spring',
   mass: 3,
-  stiffness: 200,
+  stiffness: 500,
   damping: 50,
 }
 
