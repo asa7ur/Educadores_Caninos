@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import styled from 'styled-components'
 import heroBcg from '../assets/heroBcg.jpg'
-import heroBcgMobile from '../assets/heroBcgMobile.jpg' // Import the mobile image
+import heroBcgMobile from '../assets/heroBcgMobile.jpg'
 
 const Hero = () => {
   const titleRef = useRef(null)
@@ -85,6 +85,10 @@ const Wrapper = styled.header`
   h1,
   h3 {
     color: var(--grey-100);
+  }
+
+  h3{
+    margin-bottom: 0;
   }
   
   .divider {

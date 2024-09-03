@@ -12,6 +12,8 @@ Brainstorming
 dist
 dist-ssr
 *.local
+.env
+.netlify
 
 # Editor directories and files
 .vscode/*

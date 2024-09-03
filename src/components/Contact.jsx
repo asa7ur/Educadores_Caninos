@@ -1,52 +1,103 @@
 import styled from 'styled-components'
+import { useState } from 'react'
+import axios from 'axios'
 
 const Contact = () => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [result, setResult] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    try {
+      await axios.post('/api/email', {
+        name,
+        email,
+        subject,
+        message,
+      })
+
+      setName('')
+      setEmail('')
+      setSubject('')
+      setMessage('')
+      setResult('¡Mensaje enviado con éxito!')
+    } catch (error) {
+      setResult(error.response.data)
+    } finally {
+      setIsLoading(false)
+      setTimeout(() => {
+        setResult('')
+      }, 3000)
+    }
+  }
+
   return (
-    <Wrapper>
+    <Wrapper id='contact-me'>
       <div className='section-center section'>
         <div className='content'>
           <div className='section-hero'>
             <h2>¿Tienes dudas?</h2>
             <p>
-              Si quieres preguntarnos más información no dudes en escribirnos y
-              estaremos encantadas de ofrecerte la mejor experiencia Tartas
-              Karina. Además tenemos un apartado de preguntas frecuentes para
-              que resuelvas tus dudas aún más fácilmente.
+              ¿Tienes preguntas sobre cómo podemos ayudar a tu perro a aprender
+              y crecer? No te preocupes, estamos aquí para guiarte en cada paso
+              del camino. Escríbenos o llámanos, y juntos encontraremos la mejor
+              solución para las necesidades de tu mascota.
             </p>
           </div>
-          <form className='form'>
+          <form className='form' onSubmit={handleSubmit}>
             <h2>Escríbenos</h2>
             <div className='form-group'>
               <input
                 type='text'
-                name='name'
                 className='user_name'
+                id='name'
                 placeholder='Nombre'
-                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
+
               <input
                 type='email'
-                name='email'
                 className='user_email'
-                placeholder='Correo electrónico'
-                required
+                id='email'
+                placeholder='Correo Electrónico'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
+
               <input
                 type='text'
-                name='subject'
                 className='subject'
-                placeholder='Motivo de consulta'
-                required
+                id='subject'
+                placeholder='motivo de consulta'
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
               />
+
               <textarea
-                name='message'
+                id='message'
                 className='message'
-                placeholder='Tu mensaje'
-                required
+                spellCheck='false'
+                placeholder='Mensaje'
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               ></textarea>
             </div>
             <div className='form-group result-container'>
-              <button type='submit' className='submit-btn btn'></button>
+              <button type='submit' className='submit-btn btn'>
+                {isLoading ? <span className='sending'></span> : 'Enviar mensaje'}
+              </button>
+              {result && (
+                <div className='result' style={{ opacity: 1 }}>
+                  {result}
+                </div>
+              )}
             </div>
           </form>
         </div>
