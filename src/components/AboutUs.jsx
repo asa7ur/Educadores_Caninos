@@ -156,7 +156,7 @@ const Wrapper = styled.section`
     width: 90vw;
     flex-shrink: 0;
     border-radius: 1rem;
-    background-color: var(--primary-400);
+    background-color: var(--backgroundColor);
     overflow: hidden;
     align-items: center;
     justify-content: center;
@@ -241,6 +241,29 @@ const Wrapper = styled.section`
     width: 100%;
     height: 100px;
     transform: rotateY(180deg);
+  }
+
+  @media (max-width: 768px) {
+    .slide {
+      flex-direction: column;
+      height: auto;
+    }
+
+    .image {
+      flex: 1 1 auto;
+      width: 100%;
+      max-height: 50vh;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .description {
+      margin: 1rem 0 0;
+      font-size: 1rem;
+    }
   }
 `
 

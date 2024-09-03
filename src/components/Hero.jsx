@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import styled from 'styled-components'
 import heroBcg from '../assets/heroBcg.jpg'
+import heroBcgMobile from '../assets/heroBcgMobile.jpg' // Import the mobile image
 
 const Hero = () => {
   const titleRef = useRef(null)
@@ -26,12 +27,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <Wrapper
-      id='hero'
-      className='image'
-      style={{ backgroundImage: `url(${heroBcg})` }}
-      ref={imageRef}
-    >
+    <Wrapper ref={imageRef}>
       <div className='section section-center'>
         <div className='content' ref={titleRef}>
           <h3>Educación canina</h3>
@@ -71,8 +67,10 @@ const Wrapper = styled.header`
   height: calc(100vh - 83px);
   width: 100%;
   background-size: cover;
-  background-position: 100% 40%;
+  background-position: center;
+  background-image: url(${heroBcg});
 
+  
   .content {
     position: absolute;
     top: 35%;
@@ -83,12 +81,12 @@ const Wrapper = styled.header`
     flex-direction: column;
     align-items: center;
   }
-
+  
   h1,
   h3 {
     color: var(--grey-100);
   }
-
+  
   .divider {
     position: absolute;
     bottom: 0;
@@ -98,29 +96,27 @@ const Wrapper = styled.header`
     overflow: hidden;
     line-height: 0;
   }
-
+  
   .divider svg {
     display: block;
     width: 100%;
     height: 100px;
     transform: rotateY(180deg);
   }
-
-  @media (min-width: 992px) {
-    position: relative;
-    height: calc(100vh - 83px);
-    width: 100%;
-    background-size: cover;
-    display: grid;
-    place-items: center;
-
+  
+  @media (min-width: 1024px) {
     .content {
       top: 35%;
     }
-
+    
     h1 {
       font-size: 4rem;
       margin-bottom: 1.5rem;
     }
   }
-`
+  
+  @media (max-width: 768px) {
+    background-image: url(${heroBcgMobile});
+    background-position: center;
+  }
+  `
