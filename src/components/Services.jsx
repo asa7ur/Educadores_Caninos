@@ -30,7 +30,7 @@ const Services = () => {
     })
   }, [])
   return (
-    <Wrapper>
+    <Wrapper id='servicios'>
       <div className='section-center section'>
         <h2>Nuestros servicios</h2>
         <div className='services-center'>

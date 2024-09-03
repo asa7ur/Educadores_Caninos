@@ -78,7 +78,7 @@ const NavBar = () => {
                 const { id, to, value } = link
                 return (
                   <li className='link' key={id}>
-                    <Link to={to} smooth={true} offset={-61.7} duration={500}>
+                    <Link to={to} smooth={true} offset={-82} duration={500}>
                       {value}
                     </Link>
                   </li>
@@ -92,7 +92,7 @@ const NavBar = () => {
             const { id, to, value } = link
             return (
               <li className='link' key={id}>
-                <Link to={to} smooth={true} offset={-63.2} duration={500}>
+                <Link to={to} smooth={true} offset={-82} duration={500}>
                   {value}
                 </Link>
               </li>

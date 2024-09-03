@@ -52,7 +52,7 @@ export const AboutUs = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper id='nuestro-equipo'>
       <div className='section'>
         <h2>Conoce al equipo</h2>
         <motion.div

@@ -39,7 +39,7 @@ const Contact = () => {
   }
 
   return (
-    <Wrapper id='contact-me'>
+    <Wrapper id='contactar'>
       <div className='section-center section'>
         <div className='content'>
           <div className='section-hero'>
@@ -254,7 +254,6 @@ const Wrapper = styled.section`
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      margin-top: 2rem;
     }
 
     .section-hero {

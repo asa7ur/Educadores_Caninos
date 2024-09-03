@@ -27,7 +27,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <Wrapper ref={imageRef}>
+    <Wrapper id='hero' ref={imageRef}>
       <div className='section section-center'>
         <div className='content' ref={titleRef}>
           <h3>Educación canina</h3>
