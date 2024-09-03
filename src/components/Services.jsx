@@ -112,7 +112,8 @@ const Wrapper = styled.section`
   }
 
   img {
-    width: 200px;
+    width: 250px;
+    padding-bottom: 1rem;
   }
 
   .divider {

@@ -32,7 +32,7 @@
     --spacing: 1px;
     --transition: all 0.3s ease;
     --max-width: 1400px;
-    --fixed-width: 500px;
+    --fixed-width: 600px;
     --border: 1px solid var(--grey-700);
     --padding: 0.75rem 1.2rem;
     --bodyFont: 'Poppins', serif;
