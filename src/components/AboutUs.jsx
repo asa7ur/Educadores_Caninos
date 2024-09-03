@@ -265,6 +265,12 @@ const Wrapper = styled.section`
       font-size: 1rem;
     }
   }
+
+  @media (max-width: 460px) {
+    .image {
+      max-height: 40vh;
+    }
+  }
 `
 
 export default AboutUs
