@@ -8,6 +8,7 @@ import gsap from 'gsap'
 
 const NavBar = () => {
   const [open, setOpen] = useState(false)
+  const [activeLink, setActiveLink] = useState(null)
   const navbarRef = useRef(null)
 
   useEffect(() => {
@@ -60,7 +61,16 @@ const NavBar = () => {
     <Wrapper className='nav' ref={navbarRef}>
       <div className='nav-container'>
         <div className='nav-logo'>
-          <Link to='hero' smooth={true} offset={-82} duration={500}>
+          <Link
+            to='hero'
+            smooth={true}
+            offset={-82}
+            duration={500}
+            onClick={() => {
+              setActiveLink(null)
+              setOpen(false) // Close the dropdown
+            }}
+          >
             <img src={logo} alt='logo' />
           </Link>
         </div>
@@ -76,11 +86,37 @@ const NavBar = () => {
             <ul>
               {links.map((link) => {
                 const { id, to, value } = link
+                const isExternal = to.startsWith('https')
                 return (
-                  <li className='link' key={id}>
-                    <Link to={to} smooth={true} offset={-82} duration={500}>
-                      {value}
-                    </Link>
+                  <li
+                    className={`link ${
+                      activeLink === id && !isExternal ? 'active' : ''
+                    }`}
+                    key={id}
+                  >
+                    {isExternal ? (
+                      <a
+                        href={to}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        onClick={() => setOpen(false)} // Close the dropdown
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <Link
+                        to={to}
+                        smooth={true}
+                        offset={-82}
+                        duration={500}
+                        onClick={() => {
+                          setActiveLink(id)
+                          setOpen(false) // Close the dropdown
+                        }}
+                      >
+                        {value}
+                      </Link>
+                    )}
                   </li>
                 )
               })}
@@ -90,11 +126,29 @@ const NavBar = () => {
         <ul className='nav-links'>
           {links.map((link) => {
             const { id, to, value } = link
+            const isExternal = to.startsWith('https')
             return (
-              <li className='link' key={id}>
-                <Link to={to} smooth={true} offset={-82} duration={500}>
-                  {value}
-                </Link>
+              <li
+                className={`link ${
+                  activeLink === id && !isExternal ? 'active' : ''
+                }`}
+                key={id}
+              >
+                {isExternal ? (
+                  <a href={to} target='_blank' rel='noopener noreferrer'>
+                    {value}
+                  </a>
+                ) : (
+                  <Link
+                    to={to}
+                    smooth={true}
+                    offset={-82}
+                    duration={500}
+                    onClick={() => setActiveLink(id)}
+                  >
+                    {value}
+                  </Link>
+                )}
               </li>
             )
           })}
@@ -103,6 +157,7 @@ const NavBar = () => {
     </Wrapper>
   )
 }
+
 
 export default NavBar
 
@@ -162,6 +217,35 @@ const Wrapper = styled.nav`
     cursor: pointer;
   }
 
+  .link a:hover,
+  .link a:active {
+    color: var(--primary-500);
+  }
+
+  .link.active a {
+    color: var(--primary-500);
+  }
+
+  .link.active a::after {
+    background-color: var(--primary-500);
+  }
+
+  .link a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .link a:hover::after,
+  .link a:active::after {
+    background-color: var(--primary-500);
+  }
+
   .dropdown-menu {
     position: absolute;
     top: 83px;
@@ -170,7 +254,7 @@ const Wrapper = styled.nav`
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     padding: 10px 20px;
-    width: 150px;
+    width: auto;
   }
 
   .dropdown-menu.active {
@@ -196,9 +280,14 @@ const Wrapper = styled.nav`
     padding: 10px 0;
   }
 
-  .dropdown-menu ul li:hover a {
+  .dropdown-menu ul li:hover a,
+  .dropdown-menu ul li a:active {
     color: var(--primary-500);
     cursor: pointer;
+  }
+
+  .dropdown-menu ul li.active a {
+    color: var(--primary-500);
   }
 
   @media (min-width: 800px) {

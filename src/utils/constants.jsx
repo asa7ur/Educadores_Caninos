@@ -25,7 +25,7 @@ export const links = [
   },
   {
     id: 4,
-    to: 'el_santuario',
+    to: 'https://santuariolacandela.com/el-santuario/',
     value: 'el santuario',
   },
 ]
