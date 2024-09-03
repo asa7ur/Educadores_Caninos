@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as ScrollLink } from 'react-scroll'
+import { links } from '../utils/constants'
 import gsap from 'gsap'
 import styled from 'styled-components'
 import heroBcg from '../assets/heroBcg.jpg'
@@ -32,9 +33,15 @@ const Hero = () => {
         <div className='content' ref={titleRef}>
           <h3>Educación canina</h3>
           <h1>Profesional</h1>
-          <Link to='/productos' className='btn'>
+          <ScrollLink
+            to='contactar'
+            smooth={true}
+            offset={-82}
+            duration={500}
+            className='btn'
+          >
             Infórmate
-          </Link>
+          </ScrollLink>
         </div>
         <div className='divider'>
           <svg

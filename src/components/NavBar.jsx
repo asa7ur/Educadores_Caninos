@@ -68,7 +68,7 @@ const NavBar = () => {
             duration={500}
             onClick={() => {
               setActiveLink(null)
-              setOpen(false) // Close the dropdown
+              setOpen(false)
             }}
           >
             <img src={logo} alt='logo' />
@@ -99,7 +99,7 @@ const NavBar = () => {
                         href={to}
                         target='_blank'
                         rel='noopener noreferrer'
-                        onClick={() => setOpen(false)} // Close the dropdown
+                        onClick={() => setOpen(false)}
                       >
                         {value}
                       </a>
@@ -111,7 +111,7 @@ const NavBar = () => {
                         duration={500}
                         onClick={() => {
                           setActiveLink(id)
-                          setOpen(false) // Close the dropdown
+                          setOpen(false)
                         }}
                       >
                         {value}
@@ -157,7 +157,6 @@ const NavBar = () => {
     </Wrapper>
   )
 }
-
 
 export default NavBar
 
