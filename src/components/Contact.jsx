@@ -220,7 +220,7 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 3rem;
+    gap: 1.5rem;
   }
 
   .result-container p {
