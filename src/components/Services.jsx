@@ -131,6 +131,7 @@ const Wrapper = styled.section`
 
   @media (min-width: 768px) {
     .services-center {
+      margin-top: 2rem;
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     }
   }

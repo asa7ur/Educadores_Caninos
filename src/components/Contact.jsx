@@ -68,8 +68,8 @@ const Contact = () => {
             </div>
             <iframe
               src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19589.225487770254!2d-6.141493234015088!3d37.25931974869507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd120d000e8705b1%3A0x8b0f0270db89eb86!2sSantuario%20La%20Candela!5e0!3m2!1sen!2ses!4v1725445899156!5m2!1sen!2ses'
-              width='400'
-              height='300'
+              width='325'
+              height='250'
               style={{ border: 0 }}
               allowFullScreen=''
               loading='lazy'

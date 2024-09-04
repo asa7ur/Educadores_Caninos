@@ -138,6 +138,7 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: center;
     position: relative;
+    margin-top: 3rem;
   }
 
   .slides {
@@ -159,7 +160,7 @@ const Wrapper = styled.section`
     transition: var(--transition);
   }
 
-  .slide:hover{
+  .slide:hover {
     box-shadow: none;
   }
 
@@ -244,6 +245,10 @@ const Wrapper = styled.section`
   }
 
   @media (max-width: 768px) {
+    .carousel {
+      margin-top: 2rem;
+    }
+    
     .slide {
       flex-direction: column;
       height: auto;
