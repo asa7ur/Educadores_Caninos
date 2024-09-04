@@ -103,12 +103,18 @@ const Wrapper = styled.section`
     text-align: center;
     padding: 2.5rem 2rem;
     border-radius: var(--radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
     p {
       margin-bottom: 0;
       line-height: 1.8;
       color: var(--black);
       max-width: 100%;
     }
+  }
+
+  .service:hover{
+    box-shadow: none;
   }
 
   img {

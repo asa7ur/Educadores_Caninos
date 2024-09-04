@@ -112,7 +112,7 @@ const Contact = () => {
                 {isLoading ? (
                   <span className='sending'></span>
                 ) : (
-                  'Enviar mensaje'
+                  'Enviar'
                 )}
               </button>
               {result && (
@@ -151,6 +151,8 @@ const Wrapper = styled.section`
 
   p {
     line-height: 2;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
     max-width: 45em;
     color: var(--grey-500);
   }
@@ -182,6 +184,7 @@ const Wrapper = styled.section`
     box-shadow: var(--shadow-3);
     padding: 2rem 2.5rem;
     margin: 3rem auto;
+    box-shadow: var(--box-shadow);
   }
 
   .form-section {
@@ -241,8 +244,8 @@ const Wrapper = styled.section`
 
   .sending {
     display: inline-block;
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
     border: 3px solid var(--grey-400);
     border-top-color: var(--primary-500);
@@ -275,12 +278,15 @@ const Wrapper = styled.section`
   }
 
   @media (max-width: 768px) {
+    p{
+      font-size: 0.875rem;
+    }
+    
     .links {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 3rem;
-      padding-top: 1rem;
     }
 
     .links .icon {

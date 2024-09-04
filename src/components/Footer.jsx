@@ -20,9 +20,11 @@ const Container = styled.footer`
   align-items: center;
   background: var(--black);
   text-align: center;
+  
   span {
     color: var(--primary-500);
   }
+
   h5 {
     color: var(--white);
     margin: 0.1rem;
@@ -30,6 +32,7 @@ const Container = styled.footer`
     text-transform: none;
     line-height: 1.25;
   }
+
   @media (min-width: 460px) {
     flex-direction: row;
   }

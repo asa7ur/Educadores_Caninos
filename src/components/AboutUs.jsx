@@ -161,6 +161,12 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: center;
     margin: 0 5vw;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+  }
+
+  .slide:hover{
+    box-shadow: none;
   }
 
   .image {

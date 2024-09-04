@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
   if (!name || !email || !subject || !message) {
     return {
       statusCode: 400,
-      body: 'Please Provide All Values',
+      body: 'Proporcione todos los valores.',
     }
   }
 
@@ -42,7 +42,7 @@ exports.handler = async (event, context) => {
     await transporter.sendMail({ ...data })
     return {
       statusCode: 200,
-      body: 'Email Sent!',
+      body: 'Correo enviado!',
     }
   } catch (error) {
     return {
