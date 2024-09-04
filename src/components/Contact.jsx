@@ -75,6 +75,7 @@ const Contact = () => {
               loading='lazy'
               referrerPolicy='no-referrer-when-downgrade'
               title='Santuario La Candela'
+              className='map'
             ></iframe>
           </div>
           <form className='form' onSubmit={handleSubmit}>
@@ -306,7 +307,8 @@ const Wrapper = styled.section`
     }
 
     .form {
-      padding: 2rem 2rem;
+      padding: 2rem 1.5rem;
+      margin-top: 1rem;
     }
 
     .form-group textarea {
@@ -316,6 +318,10 @@ const Wrapper = styled.section`
 
     input {
       font-size: 0.875rem;
+    }
+
+    .map{
+      display: none;
     }
 
     .btn {
