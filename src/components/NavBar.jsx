@@ -57,6 +57,38 @@ const NavBar = () => {
     }
   }, [])
 
+  useEffect(() => {
+    const sections = links
+      .map((link) => document.getElementById(link.to))
+      .filter((section) => section !== null)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const activeSection = links.find(
+              (link) => link.to === entry.target.id
+            )
+            if (activeSection) {
+              setActiveLink(activeSection.id)
+            }
+          }
+        })
+      },
+      {
+        threshold: 0.4,
+      }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => {
+      sections.forEach((section) => {
+        if (section) observer.unobserve(section)
+      })
+    }
+  }, [])
+
   return (
     <Wrapper className='nav' ref={navbarRef}>
       <div className='nav-container'>
