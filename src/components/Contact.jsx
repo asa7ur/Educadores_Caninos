@@ -161,7 +161,6 @@ const Wrapper = styled.section`
   p {
     line-height: 2;
     font-size: 1rem;
-    margin-bottom: 1.25rem;
     max-width: 45em;
     color: var(--grey-500);
   }
@@ -171,6 +170,7 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: center;
     gap: 3rem;
+    margin: 1rem 0;
   }
 
   .links .icon {
@@ -273,7 +273,6 @@ const Wrapper = styled.section`
     }
 
     p {
-      margin-bottom: 0;
       font-size: 1.2rem;
     }
 
@@ -286,10 +285,6 @@ const Wrapper = styled.section`
   }
 
   @media (max-width: 768px) {
-    p {
-      font-size: 0.875rem;
-    }
-
     .links {
       display: flex;
       align-items: center;
