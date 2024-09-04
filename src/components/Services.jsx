@@ -43,7 +43,7 @@ const Services = () => {
                 ref={(el) => (serviceRefs.current[index] = el)}
               >
                 <img src={image} alt={title} />
-                <h4>{title}</h4>
+                <h3>{title}</h3>
                 <p>{description}</p>
               </article>
             )
@@ -82,7 +82,7 @@ export default Services
 const Wrapper = styled.section`
   background: var(--backgroundColor);
 
-  h4 {
+  h3 {
     color: var(--primary-600);
   }
 

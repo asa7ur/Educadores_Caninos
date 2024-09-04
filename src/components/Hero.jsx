@@ -32,6 +32,7 @@ const Hero = () => {
         <div className='content' ref={titleRef}>
           <h3>Educación canina</h3>
           <h1>Profesional</h1>
+          <h2>En Sevilla</h2>
           <ScrollLink
             to='contactar'
             smooth={true}
@@ -79,7 +80,7 @@ const Wrapper = styled.header`
   
   .content {
     position: absolute;
-    top: 35%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
@@ -89,12 +90,18 @@ const Wrapper = styled.header`
   }
   
   h1,
+  h2,
   h3 {
     color: var(--grey-100);
+    margin-bottom: 0.25rem;
   }
 
-  h3{
-    margin-bottom: 0;
+  h2{
+    text-transform: none;
+  }
+
+  .btn{
+    margin-top: 0.5rem;
   }
   
   .divider {
@@ -121,7 +128,6 @@ const Wrapper = styled.header`
     
     h1 {
       font-size: 4rem;
-      margin-bottom: 1.5rem;
     }
   }
   

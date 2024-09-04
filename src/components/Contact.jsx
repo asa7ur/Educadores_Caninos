@@ -47,8 +47,7 @@ const Contact = () => {
             <p>
               ¿Tienes preguntas sobre cómo podemos ayudar a tu perro a aprender
               y crecer? No te preocupes, estamos aquí para guiarte en cada paso
-              del camino. Escríbenos o llámanos, y juntos encontraremos la mejor
-              solución para las necesidades de tu mascota.
+              del camino. 
             </p>
             <div className='links'>
               {socials.map((social) => {
@@ -67,6 +66,16 @@ const Contact = () => {
                 )
               })}
             </div>
+            <iframe
+              src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19589.225487770254!2d-6.141493234015088!3d37.25931974869507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd120d000e8705b1%3A0x8b0f0270db89eb86!2sSantuario%20La%20Candela!5e0!3m2!1sen!2ses!4v1725445899156!5m2!1sen!2ses'
+              width='400'
+              height='300'
+              style={{ border: 0 }}
+              allowFullScreen=''
+              loading='lazy'
+              referrerPolicy='no-referrer-when-downgrade'
+              title='Santuario La Candela'
+            ></iframe>
           </div>
           <form className='form' onSubmit={handleSubmit}>
             <h2>Escríbenos</h2>
@@ -109,11 +118,7 @@ const Contact = () => {
             </div>
             <div className='form-group result-container'>
               <button type='submit' className='submit-btn btn'>
-                {isLoading ? (
-                  <span className='sending'></span>
-                ) : (
-                  'Enviar'
-                )}
+                {isLoading ? <span className='sending'></span> : 'Enviar'}
               </button>
               {result && (
                 <div className='result' style={{ opacity: 1 }}>
@@ -145,7 +150,7 @@ const Wrapper = styled.section`
     justify-content: center;
   }
 
-  h2{
+  h2 {
     text-align: left;
   }
 
@@ -274,18 +279,17 @@ const Wrapper = styled.section`
 
     .links {
       display: flex;
-      flex-direction: column;
       align-items: flex-start;
       gap: 2rem;
-      margin-top: 2rem;
+      margin: 1rem 0;
     }
   }
 
   @media (max-width: 768px) {
-    p{
+    p {
       font-size: 0.875rem;
     }
-    
+
     .links {
       display: flex;
       align-items: center;
