@@ -131,12 +131,6 @@ const Wrapper = styled.section`
   overflow: hidden;
   background-color: var(--primary-200);
 
-  h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--primary-600);
-  }
-
   .carousel {
     display: flex;
     width: 100%;

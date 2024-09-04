@@ -145,6 +145,10 @@ const Wrapper = styled.section`
     justify-content: center;
   }
 
+  h2{
+    text-align: left;
+  }
+
   h3 {
     text-transform: none;
   }

@@ -35,7 +35,8 @@
     --fixed-width: 600px;
     --border: 1px solid var(--grey-700);
     --padding: 0.75rem 1.2rem;
-    --bodyFont: 'Poppins', serif;
+    --headingFont: 'Montserrat', sans-serif;
+    --bodyFont: 'Hind', sans-serif;
     --gradient: linear-gradient(to right, var(--primary-500), var(--primary-100));
     --box-shadow: 0px 0px 10px 0px var(--primary-500);
 
@@ -80,11 +81,18 @@ h5 {
 }
 
 h1 {
+    font-family: var(--headingFont);
     font-size: 2.5rem;
+    font-weight: 600;
 }
 
 h2 {
+    font-family: var(--headingFont);
     font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
 }
 
 h3 {
@@ -101,6 +109,7 @@ h5 {
 
 a {
     text-decoration: none;
+    font-family: var(--bodyFont);
 }
 
 .img {
@@ -126,6 +135,7 @@ a {
     padding: 0.375rem 0.75rem;
     letter-spacing: var(--spacing);
     display: inline-block;
+    font-family: var(--bodyFont);
     font-weight: 400;
     transition: var(--transition);
     font-size: 1rem;
@@ -184,15 +194,15 @@ a {
     }
 
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
     }
 
     h3 {
-        font-size: 1.25rem;
+        font-size: 1.55rem;
     }
 
     h4 {
-        font-size: 1rem;
+        font-size: 1.25rem;
     }
 
     h5 {
@@ -200,7 +210,7 @@ a {
     }
 
     .btn {
-        font-size: 0.75rem;
+        font-size: 1rem;
         padding: 0.5rem 1rem;
     }
 }

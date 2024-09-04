@@ -82,12 +82,6 @@ export default Services
 const Wrapper = styled.section`
   background: var(--backgroundColor);
 
-  h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--primary-600);
-  }
-
   h4 {
     color: var(--primary-600);
   }
